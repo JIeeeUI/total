@@ -1,0 +1,37 @@
+name: Daily SK Hynix Stock Fetch (KST 16:00)
+
+on:
+  schedule:
+    # 한국 시간(KST) 매일 16:00 (UTC 07:00)
+    - cron: '0 7 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fetch-and-commit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Fetch Latest Price
+        run: node scripts/fetch-price.js
+
+      - name: Commit and Push Changes
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add data/
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "chore(data): auto-update SK Hynix stock price [skip ci]"
+            git push
+          fi

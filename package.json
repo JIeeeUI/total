@@ -1,0 +1,9 @@
+{
+  "name": "t04-sk-hynix-board",
+  "version": "1.0.0",
+  "private": true,
+  "description": "T04 오늘의 SK하이닉스 주가 정보판",
+  "scripts": {
+    "fetch": "node scripts/fetch-price.js"
+  }
+}

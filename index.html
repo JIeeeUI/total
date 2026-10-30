@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>T04 오늘의 SK하이닉스 주가 정보판 — 데이터가 안 올 때</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- 헤더 -->
+  <header>
+    <h1>오늘의 SK하이닉스 주가 정보판</h1>
+    <div>
+      <span id="mode-badge" class="live">실제 라이브 모드 (LIVE)</span>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <!-- 상태 알림 배지 (Fresh / Stale) -->
+    <div id="status-badge" class="fresh">
+      ● 정상 실시간 데이터 (Fresh / None)
+    </div>
+
+    <!-- 1. 핵심 주가 카드 -->
+    <div class="card">
+      <h2>📈 오늘의 SK하이닉스 종가</h2>
+      <div class="main-value">
+        <span class="number" id="val-number">-</span>
+        <span class="unit-label" id="val-unit">원</span>
+      </div>
+      <div id="val-delta" class="delta">― 어제 대비 계산 중...</div>
+
+      <!-- 장애 발생 시 노출되는 Stale 경고 박스 (C17, C18, C19) -->
+      <div id="stale-warning-box" class="stale-warning hidden">
+        <div class="title">⚠️ 데이터 수집 지연/오류 — 마지막 정상값 유지 중</div>
+        <div class="desc">
+          오류 코드: <strong id="stale-err-code">timeout</strong><br>
+          <span id="stale-err-desc">외부 서버 응답 지연으로 최신 데이터를 가져오지 못했습니다.</span>
+        </div>
+        <button id="btn-retry-action" class="retry-btn">🔄 다시 시도 (Retry)</button>
+      </div>
+    </div>
+
+    <!-- 2. 세부 정보 카드 (C04 ~ C09 규격 충족) -->
+    <div class="card">
+      <h2>📋 데이터 출처 및 관측 정보</h2>
+      <div class="info-row">
+        <span class="label">신호 ID (signal_id)</span>
+        <span class="val" id="info-signal-id">-</span>
+      </div>
+      <div class="info-row">
+        <span class="label">공개 원천 명칭</span>
+        <span class="val" id="info-source-name">한국거래소 KRX / 네이버페이 증권</span>
+      </div>
+      <div class="info-row">
+        <span class="label">공개 원천 URL (HTTPS)</span>
+        <span class="val"><a id="info-source-url" href="#" target="_blank" rel="noopener">-</a></span>
+      </div>
+      <div class="info-row">
+        <span class="label">원천 관측 시각 (source_time)</span>
+        <span class="val" id="info-source-time">-</span>
+      </div>
+      <div class="info-row">
+        <span class="label">시스템 수집 시각 (fetched_at)</span>
+        <span class="val" id="info-fetched-at">-</span>
+      </div>
+      <div class="info-row">
+        <span class="label">기준 시간대</span>
+        <span class="val" id="info-record-timezone">Asia/Seoul (KST)</span>
+      </div>
+      <div class="info-row">
+        <span class="label">기준 일자 (record_date)</span>
+        <span class="val" id="info-record-date">-</span>
+      </div>
+    </div>
+
+    <!-- 3. 원자료 · 저장값 · 화면값 100% 일치 대조 (T04-C10) -->
+    <div class="card">
+      <h2>🔍 원자료 · 저장값 · 화면값 일치 대조 (T04-C10)</h2>
+      <div class="compare-grid">
+        <div class="compare-col">
+          <div class="col-title">① 외부 원자료 응답</div>
+          <div class="col-value" id="cmp-raw">-</div>
+        </div>
+        <div class="compare-col">
+          <div class="col-title">② 정규화 저장값 (JSON)</div>
+          <div class="col-value" id="cmp-stored">-</div>
+        </div>
+        <div class="compare-col">
+          <div class="col-title">③ 사용자 화면 표시값</div>
+          <div class="col-value" id="cmp-screen">-</div>
+        </div>
+      </div>
+      <div id="cmp-badge" class="match-badge ok">✅ 3개 값 완전 일치</div>
+    </div>
+
+    <!-- 4. 과제 플랫폼 기록 제출 도우미 (업로드하신 과제 화면 100% 맞춤) -->
+    <div class="card" style="border: 2px solid var(--blue-600); background: #f0f7ff;">
+      <h2 style="color: var(--blue-700);">📝 과제 플랫폼 [실제 공개 원천 기록] 복사용 박스</h2>
+      <p style="font-size: 0.83rem; color: var(--gray-700); margin-bottom: 12px;">
+        과제 제출 플랫폼 화면에 그대로 복사해서 붙여넣으실 수 있도록 정리된 값입니다.
+      </p>
+      
+      <div style="margin-bottom: 8px;">
+        <label style="font-size: 0.78rem; font-weight: 700; color: var(--gray-700);">실제 공개 원천 URL</label>
+        <div style="display: flex; gap: 6px; margin-top: 2px;">
+          <input type="text" id="sub-url" readonly style="flex:1; padding: 6px 10px; font-size: 0.8rem; border:1px solid #cbd5e1; border-radius:6px; background:#fff;">
+          <button id="copy-btn-url" onclick="copyFieldValue('sub-url', 'copy-btn-url')" class="fixture-btn">복사</button>
+        </div>
+      </div>
+
+      <div style="margin-bottom: 8px;">
+        <label style="font-size: 0.78rem; font-weight: 700; color: var(--gray-700);">원천에 표시된 관측 시각 (RFC 3339·시간대 포함)</label>
+        <div style="display: flex; gap: 6px; margin-top: 2px;">
+          <input type="text" id="sub-obs-time" readonly style="flex:1; padding: 6px 10px; font-size: 0.8rem; border:1px solid #cbd5e1; border-radius:6px; background:#fff;">
+          <button id="copy-btn-time" onclick="copyFieldValue('sub-obs-time', 'copy-btn-time')" class="fixture-btn">복사</button>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 8px;">
+        <div>
+          <label style="font-size: 0.78rem; font-weight: 700; color: var(--gray-700);">정규화 값 (숫자)</label>
+          <div style="display: flex; gap: 6px; margin-top: 2px;">
+            <input type="text" id="sub-norm-val" readonly style="flex:1; padding: 6px 10px; font-size: 0.8rem; border:1px solid #cbd5e1; border-radius:6px; background:#fff;">
+            <button id="copy-btn-val" onclick="copyFieldValue('sub-norm-val', 'copy-btn-val')" class="fixture-btn">복사</button>
+          </div>
+        </div>
+        <div>
+          <label style="font-size: 0.78rem; font-weight: 700; color: var(--gray-700);">단위</label>
+          <div style="display: flex; gap: 6px; margin-top: 2px;">
+            <input type="text" id="sub-unit" readonly style="flex:1; padding: 6px 10px; font-size: 0.8rem; border:1px solid #cbd5e1; border-radius:6px; background:#fff;">
+            <button id="copy-btn-unit" onclick="copyFieldValue('sub-unit', 'copy-btn-unit')" class="fixture-btn">복사</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. 일별 저장 기록 테이블 (C20, C21, C22, C24) -->
+    <div class="card">
+      <h2>📅 일별 저장 기록 (Asia/Seoul 하루 한 행 보존)</h2>
+      <p style="font-size: 0.8rem; color: var(--gray-500); margin-bottom: 10px;">
+        동일 날짜 내 다회 실행 시 같은 행을 갱신하며, 다음 날짜에는 새 행을 추가합니다.
+      </p>
+      <div style="overflow-x: auto;">
+        <table class="records-table">
+          <thead>
+            <tr>
+              <th>기록 날짜</th>
+              <th>종가</th>
+              <th>단위</th>
+              <th>최종 수집 시각</th>
+              <th>상태</th>
+            </tr>
+          </thead>
+          <tbody id="daily-tbody">
+            <!-- 자바스크립트로 렌더링 -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 6. 카드 3 전용 — 결정론 합성 시험 (Fixture Replay) 패널 -->
+    <div id="replay-panel" class="card" style="border: 2px solid var(--amber-600);">
+      <h2 style="color: var(--amber-600);">🧪 카드 3 · 결정론 합성 시험 (Fixture Replay)</h2>
+      <p style="font-size: 0.82rem; color: var(--gray-700); margin-bottom: 14px;">
+        과제 채점관 및 검증용 9대 합성 입력을 즉시 시뮬레이션합니다. (C12~C21, C26)
+      </p>
+
+      <div class="replay-group">
+        <h3>1단계: 합성 상태 초기화 &amp; 정상 시퀀스</h3>
+        <div class="btns">
+          <button id="btn-reset" class="fixture-btn reset">초기화 (Reset)</button>
+          <button id="btn-d1a" class="fixture-btn success">1일차 첫 조회 (D1-A, 값 100)</button>
+          <button id="btn-d1b" class="fixture-btn success">1일차 재조회 갱신 (D1-B, 값 105)</button>
+          <button id="btn-d2" class="fixture-btn success">2일차 신규 행 (D2, 값 120, +15)</button>
+        </div>
+      </div>
+
+      <div class="replay-group">
+        <h3>2단계: 5대 고장 시험 (D1-A &rarr; D1-B 실행 후 클릭)</h3>
+        <div class="btns">
+          <button id="btn-timeout" class="fixture-btn fail">⏳ 지연/타임아웃 (C12)</button>
+          <button id="btn-auth" class="fixture-btn fail">🔒 인증 실패 401 (C13)</button>
+          <button id="btn-rate" class="fixture-btn fail">🚦 한도 초과 429 (C14)</button>
+          <button id="btn-offline" class="fixture-btn fail">🔌 오프라인 단절 (C15)</button>
+          <button id="btn-schema" class="fixture-btn fail">💥 형식 오류 (C16)</button>
+        </div>
+      </div>
+
+      <div class="replay-group">
+        <h3>3단계: 장애 후 회복 (C19) 및 일괄 종합 검증</h3>
+        <div class="btns">
+          <button id="btn-seq-recover" class="fixture-btn recover">🎯 C19 복구 시나리오 원클릭 준비 (D1&rarr;TIMEOUT)</button>
+          <button id="btn-recover" class="fixture-btn recover">🔄 RECOVER-D2 재생 (복구)</button>
+          <button id="btn-run-all" class="fixture-btn" style="background: #2563eb; color: #fff; border-color: #2563eb;">🚀 전체 35개 기준 자동 검증 실행</button>
+          <button id="btn-exit-replay" class="fixture-btn exit">🔙 라이브 모드로 복귀</button>
+        </div>
+      </div>
+
+      <div class="replay-group">
+        <h3>시험 실행 결과 로그</h3>
+        <div id="replay-log" class="replay-log">
+          <div class="log-entry pass">
+            <div class="log-title">준비 완료</div>
+            <div class="log-detail">버튼을 클릭하면 해당 fixture 검증 결과가 여기에 기록됩니다.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    T04 오늘의 진짜 정보판 · SK하이닉스 종가 · 개인정보 0건 · 비밀키 0건 · KST 기준
+  </footer>
+
+  <script src="js/replay.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
