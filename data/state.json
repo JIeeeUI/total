@@ -20,34 +20,56 @@
         "record_timezone": "Asia/Seoul",
         "record_date": "2026-10-30"
       }
+    },
+    {
+      "record_id": "live-sk-hynix-close-price-2026-11-02",
+      "signal_id": "sk-hynix-close-price",
+      "record_date": "2026-11-02",
+      "normalized_value": 1418000,
+      "unit": "원",
+      "first_fetched_at": "2026-11-02T01:01:21.301Z",
+      "last_fetched_at": "2026-11-02T01:01:21.301Z",
+      "reading": {
+        "signal_id": "sk-hynix-close-price",
+        "normalized_value": 1418000,
+        "unit": "원",
+        "source_name": "한국거래소 KRX / 네이버페이 증권",
+        "source_url": "https://m.stock.naver.com/api/stock/000660/integration",
+        "source_time": "2026-10-30T15:30:00+09:00",
+        "fetched_at": "2026-11-02T01:01:21.301Z",
+        "record_timezone": "Asia/Seoul",
+        "record_date": "2026-11-02"
+      }
     }
   ],
   "current_reading": {
     "signal_id": "sk-hynix-close-price",
-    "normalized_value": 1526000,
+    "normalized_value": 1418000,
     "unit": "원",
     "source_name": "한국거래소 KRX / 네이버페이 증권",
     "source_url": "https://m.stock.naver.com/api/stock/000660/integration",
-    "source_time": "2026-10-29T15:30:00+09:00",
-    "fetched_at": "2026-10-30T07:59:11.937Z",
+    "source_time": "2026-10-30T15:30:00+09:00",
+    "fetched_at": "2026-11-02T01:01:21.301Z",
     "record_timezone": "Asia/Seoul",
-    "record_date": "2026-10-30"
+    "record_date": "2026-11-02"
   },
   "status": {
     "freshness": "fresh",
     "error_code": "none"
   },
-  "last_delta": null,
+  "last_delta": 108000,
   "last_comparison": {
-    "state": "insufficient",
-    "direction": null,
-    "magnitude": null,
-    "unit": null
+    "state": "comparable",
+    "direction": "decrease",
+    "magnitude": 108000,
+    "unit": "원",
+    "previous_value": 1526000,
+    "diff": -108000
   },
   "raw_response": {
     "stockName": "SK하이닉스",
     "itemCode": "000660",
-    "lastClosePrice": "1,526,000",
-    "latestBizdate": "20261029"
+    "lastClosePrice": "1,418,000",
+    "latestBizdate": "20261030"
   }
 }
