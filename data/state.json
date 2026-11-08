@@ -140,6 +140,26 @@
         "record_timezone": "Asia/Seoul",
         "record_date": "2026-11-07"
       }
+    },
+    {
+      "record_id": "live-sk-hynix-close-price-2026-11-08",
+      "signal_id": "sk-hynix-close-price",
+      "record_date": "2026-11-08",
+      "normalized_value": 1264000,
+      "unit": "원",
+      "first_fetched_at": "2026-11-08T07:52:44.958Z",
+      "last_fetched_at": "2026-11-08T07:52:44.958Z",
+      "reading": {
+        "signal_id": "sk-hynix-close-price",
+        "normalized_value": 1264000,
+        "unit": "원",
+        "source_name": "한국거래소 KRX / 네이버페이 증권",
+        "source_url": "https://m.stock.naver.com/api/stock/000660/integration",
+        "source_time": "2026-11-06T15:30:00+09:00",
+        "fetched_at": "2026-11-08T07:52:44.958Z",
+        "record_timezone": "Asia/Seoul",
+        "record_date": "2026-11-08"
+      }
     }
   ],
   "current_reading": {
@@ -149,9 +169,9 @@
     "source_name": "한국거래소 KRX / 네이버페이 증권",
     "source_url": "https://m.stock.naver.com/api/stock/000660/integration",
     "source_time": "2026-11-06T15:30:00+09:00",
-    "fetched_at": "2026-11-07T07:52:05.862Z",
+    "fetched_at": "2026-11-08T07:52:44.958Z",
     "record_timezone": "Asia/Seoul",
-    "record_date": "2026-11-07"
+    "record_date": "2026-11-08"
   },
   "status": {
     "freshness": "fresh",
