@@ -180,36 +180,56 @@
         "record_timezone": "Asia/Seoul",
         "record_date": "2026-11-09"
       }
+    },
+    {
+      "record_id": "live-sk-hynix-close-price-2026-11-10",
+      "signal_id": "sk-hynix-close-price",
+      "record_date": "2026-11-10",
+      "normalized_value": 1136000,
+      "unit": "원",
+      "first_fetched_at": "2026-11-10T08:04:54.606Z",
+      "last_fetched_at": "2026-11-10T08:04:54.606Z",
+      "reading": {
+        "signal_id": "sk-hynix-close-price",
+        "normalized_value": 1136000,
+        "unit": "원",
+        "source_name": "한국거래소 KRX / 네이버페이 증권",
+        "source_url": "https://m.stock.naver.com/api/stock/000660/integration",
+        "source_time": "2026-11-09T15:30:00+09:00",
+        "fetched_at": "2026-11-10T08:04:54.606Z",
+        "record_timezone": "Asia/Seoul",
+        "record_date": "2026-11-10"
+      }
     }
   ],
   "current_reading": {
     "signal_id": "sk-hynix-close-price",
-    "normalized_value": 1132000,
+    "normalized_value": 1136000,
     "unit": "원",
     "source_name": "한국거래소 KRX / 네이버페이 증권",
     "source_url": "https://m.stock.naver.com/api/stock/000660/integration",
-    "source_time": "2026-11-06T15:30:00+09:00",
-    "fetched_at": "2026-11-09T08:17:33.402Z",
+    "source_time": "2026-11-09T15:30:00+09:00",
+    "fetched_at": "2026-11-10T08:04:54.606Z",
     "record_timezone": "Asia/Seoul",
-    "record_date": "2026-11-09"
+    "record_date": "2026-11-10"
   },
   "status": {
     "freshness": "fresh",
     "error_code": "none"
   },
-  "last_delta": 132000,
+  "last_delta": 4000,
   "last_comparison": {
     "state": "comparable",
-    "direction": "decrease",
-    "magnitude": 132000,
+    "direction": "increase",
+    "magnitude": 4000,
     "unit": "원",
-    "previous_value": 1264000,
-    "diff": -132000
+    "previous_value": 1132000,
+    "diff": 4000
   },
   "raw_response": {
     "stockName": "SK하이닉스",
     "itemCode": "000660",
-    "lastClosePrice": "1,132,000",
-    "latestBizdate": "20261106"
+    "lastClosePrice": "1,136,000",
+    "latestBizdate": "20261109"
   }
 }
