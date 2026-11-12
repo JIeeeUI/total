@@ -220,36 +220,56 @@
         "record_timezone": "Asia/Seoul",
         "record_date": "2026-11-11"
       }
+    },
+    {
+      "record_id": "live-sk-hynix-close-price-2026-11-12",
+      "signal_id": "sk-hynix-close-price",
+      "record_date": "2026-11-12",
+      "normalized_value": 1277000,
+      "unit": "원",
+      "first_fetched_at": "2026-11-12T08:14:32.089Z",
+      "last_fetched_at": "2026-11-12T08:14:32.089Z",
+      "reading": {
+        "signal_id": "sk-hynix-close-price",
+        "normalized_value": 1277000,
+        "unit": "원",
+        "source_name": "한국거래소 KRX / 네이버페이 증권",
+        "source_url": "https://m.stock.naver.com/api/stock/000660/integration",
+        "source_time": "2026-11-11T15:30:00+09:00",
+        "fetched_at": "2026-11-12T08:14:32.089Z",
+        "record_timezone": "Asia/Seoul",
+        "record_date": "2026-11-12"
+      }
     }
   ],
   "current_reading": {
     "signal_id": "sk-hynix-close-price",
-    "normalized_value": 1212000,
+    "normalized_value": 1277000,
     "unit": "원",
     "source_name": "한국거래소 KRX / 네이버페이 증권",
     "source_url": "https://m.stock.naver.com/api/stock/000660/integration",
-    "source_time": "2026-11-10T15:30:00+09:00",
-    "fetched_at": "2026-11-11T08:12:38.349Z",
+    "source_time": "2026-11-11T15:30:00+09:00",
+    "fetched_at": "2026-11-12T08:14:32.089Z",
     "record_timezone": "Asia/Seoul",
-    "record_date": "2026-11-11"
+    "record_date": "2026-11-12"
   },
   "status": {
     "freshness": "fresh",
     "error_code": "none"
   },
-  "last_delta": 76000,
+  "last_delta": 65000,
   "last_comparison": {
     "state": "comparable",
     "direction": "increase",
-    "magnitude": 76000,
+    "magnitude": 65000,
     "unit": "원",
-    "previous_value": 1136000,
-    "diff": 76000
+    "previous_value": 1212000,
+    "diff": 65000
   },
   "raw_response": {
     "stockName": "SK하이닉스",
     "itemCode": "000660",
-    "lastClosePrice": "1,212,000",
-    "latestBizdate": "20261110"
+    "lastClosePrice": "1,277,000",
+    "latestBizdate": "20261111"
   }
 }
