@@ -260,6 +260,26 @@
         "record_timezone": "Asia/Seoul",
         "record_date": "2026-11-13"
       }
+    },
+    {
+      "record_id": "live-sk-hynix-close-price-2026-11-14",
+      "signal_id": "sk-hynix-close-price",
+      "record_date": "2026-11-14",
+      "normalized_value": 1254000,
+      "unit": "원",
+      "first_fetched_at": "2026-11-14T07:53:26.296Z",
+      "last_fetched_at": "2026-11-14T07:53:26.296Z",
+      "reading": {
+        "signal_id": "sk-hynix-close-price",
+        "normalized_value": 1254000,
+        "unit": "원",
+        "source_name": "한국거래소 KRX / 네이버페이 증권",
+        "source_url": "https://m.stock.naver.com/api/stock/000660/integration",
+        "source_time": "2026-11-13T15:30:00+09:00",
+        "fetched_at": "2026-11-14T07:53:26.296Z",
+        "record_timezone": "Asia/Seoul",
+        "record_date": "2026-11-14"
+      }
     }
   ],
   "current_reading": {
@@ -268,28 +288,28 @@
     "unit": "원",
     "source_name": "한국거래소 KRX / 네이버페이 증권",
     "source_url": "https://m.stock.naver.com/api/stock/000660/integration",
-    "source_time": "2026-11-12T15:30:00+09:00",
-    "fetched_at": "2026-11-13T08:13:21.388Z",
+    "source_time": "2026-11-13T15:30:00+09:00",
+    "fetched_at": "2026-11-14T07:53:26.296Z",
     "record_timezone": "Asia/Seoul",
-    "record_date": "2026-11-13"
+    "record_date": "2026-11-14"
   },
   "status": {
     "freshness": "fresh",
     "error_code": "none"
   },
-  "last_delta": 23000,
+  "last_delta": 0,
   "last_comparison": {
     "state": "comparable",
-    "direction": "decrease",
-    "magnitude": 23000,
+    "direction": "unchanged",
+    "magnitude": 0,
     "unit": "원",
-    "previous_value": 1277000,
-    "diff": -23000
+    "previous_value": 1254000,
+    "diff": 0
   },
   "raw_response": {
     "stockName": "SK하이닉스",
     "itemCode": "000660",
     "lastClosePrice": "1,254,000",
-    "latestBizdate": "20261112"
+    "latestBizdate": "20261113"
   }
 }
