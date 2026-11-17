@@ -1,0 +1,15 @@
+{
+  "performed_by": "A",
+  "environment": "New temporary folder; no dependencies installed; no environment variables",
+  "node_version": "v24.22.1",
+  "fixed_command": "node tests/t05-fixed-validation.cjs",
+  "fixed_exit_code": 1,
+  "passed": 7,
+  "failed": 3,
+  "existing_regression_exit_code": 0,
+  "handoff_original_sha256": "306b5dc103d8ae23c45ab2402daa18b530998d78f2776aa327894234eb9890fb",
+  "handoff_received_sha256": "306b5dc103d8ae23c45ab2402daa18b530998d78f2776aa327894234eb9890fb",
+  "source_sha256": "0080d9ce67216a6bc0fbfd3c1afd20f6696ddf93e898cf5afd76290070216a65",
+  "source_copy_sha256": "0080d9ce67216a6bc0fbfd3c1afd20f6696ddf93e898cf5afd76290070216a65",
+  "b_received_verified": false
+}
