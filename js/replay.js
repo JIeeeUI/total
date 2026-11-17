@@ -16,7 +16,23 @@ const ERROR_CODES = Object.freeze([
 /* ── 유틸 ── */
 function clone(v) { return JSON.parse(JSON.stringify(v)); }
 
+function isExplicitDateTime(value) {
+  if (typeof value !== 'string') return false;
+  const match = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(?:\.\d+)?(Z|([+-])(\d{2}):(\d{2}))$/.exec(value);
+  if (!match) return false;
+  const [, y, mo, d, h, mi, s, zone, , oh, om] = match;
+  const year = Number(y);
+  const month = Number(mo);
+  const leap = year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0);
+  const days = [31, leap ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+  if (month < 1 || month > 12 || Number(d) < 1 || Number(d) > days[month - 1]) return false;
+  if (Number(h) > 23 || Number(mi) > 59 || Number(s) > 59) return false;
+  if (zone !== 'Z' && (Number(oh) > 23 || Number(om) > 59)) return false;
+  return Number.isFinite(Date.parse(value));
+}
+
 function kstDate(isoString) {
+  if (!isExplicitDateTime(isoString)) throw new TypeError('invalid date-time or missing timezone');
   const d = new Date(isoString);
   if (Number.isNaN(d.getTime())) throw new TypeError('invalid date-time');
   const parts = new Intl.DateTimeFormat('en', {
@@ -43,9 +59,9 @@ function validateNormalizedReading(r) {
   let u;
   try { u = new URL(r.source_url); } catch { throw new TypeError('source_url invalid'); }
   if (u.protocol !== 'https:') throw new TypeError('source_url must be https');
-  if (r.source_time !== null && Number.isNaN(new Date(r.source_time).getTime()))
+  if (r.source_time !== null && !isExplicitDateTime(r.source_time))
     throw new TypeError('source_time invalid');
-  if (Number.isNaN(new Date(r.fetched_at).getTime()))
+  if (!isExplicitDateTime(r.fetched_at))
     throw new TypeError('fetched_at invalid');
   if (r.record_timezone !== 'Asia/Seoul')
     throw new TypeError('record_timezone must be Asia/Seoul');
